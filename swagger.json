@@ -1,0 +1,124 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is a sample api document.  You can find out more about     Uniphy at [http://ec2-13-232-240-97.ap-south-1.compute.amazonaws.com:4000/](http://ec2-13-232-240-97.ap-south-1.compute.amazonaws.com:4000/). ",
+    "version": "1.0.0",
+    "title": "Uniphy - A Digital Software product",
+    "termsOfService": "http://digitalsoftwareinc.com/terms/",
+    "contact": {
+      "email": "noreply@uniphy.com"
+    },
+    "license": {
+      "name": "Uniphy 1.0",
+      "url": "http://digitalsoftwareinc.com/page-uniphy"
+    }
+  },
+  "host": "qa.uniphytest.com:8080",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Blueprint",
+      "description": "Create/Manage your Blueprint",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "http://beta.uniphytest.com/help"
+      }
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/adapter/rest/dj/simple/releases/{releaseId}/comments": {
+      "post": {
+        "tags": [
+          "Blueprint"
+        ],
+        "summary": "Create a new comment for the specified Blueprint release",
+        "description": "",
+        "operationId": "createComment",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "releaseId",
+            "in": "path",
+            "description": "ID of Blueprint version",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "X-Cms-User",
+            "in": "header",
+            "description": "The user name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Updated user object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Comments"
+            }
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Blueprint"
+        ],
+        "summary": "Get all the comments for the specified blueprint release",
+        "description": "",
+        "operationId": "getComments",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "releaseId",
+            "in": "path",
+            "description": "ID of Blueprint version",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Comment not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Comments": {
+      "type": "object",
+      "required": [
+        "description"
+      ],
+      "properties": {
+        "description": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about Uniphy",
+    "url": "http://digitalsoftwareinc.com/page-uniphy"
+  }
+}
